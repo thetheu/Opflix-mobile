@@ -1,17 +1,17 @@
 import React, {Fragment, Component} from 'react';
-import { AsyncStorage, Text, View, TextInput, TouchableOpacity} from 'react-native';
+import { AsyncStorage, Text, View, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
 
 class SignIn extends Component{
 
-    static navigationOption = {
+    static navigationOptions = {
         header: null,
     }
 
     constructor() {
         super();
         this.state = {
-            email: "erik@email.com",
-            senha: "123456"
+            email: "",
+            senha: ""
         };
     }
 
@@ -45,23 +45,82 @@ class SignIn extends Component{
 
     render() {
         return(
+            <View style={styles.fundo}>
+                
             <View>
+                <Text style={styles.text}>OPFLIX</Text>
                 <TextInput
+                placeholderTextColor="gray"
                 placeholder="email"
                 onChangeText={email => this.setState({ email })}
                 value={this.state.email}
+                style={styles.email}
                 />
-                <TextInput 
+                <TextInput
+                placeholderTextColor="gray"
                 placeholder="senha"
                 onChangeText={senha => this.setState({ senha })}
                 value={this.state.senha}
+                style={styles.senha}
                 />
                 <TouchableOpacity onPress={this._realizarLogin}>
-                    <Text>Logar</Text>
+                    <Text style={styles.botao}>Logar</Text>
                 </TouchableOpacity>
             </View>
+                </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    fundo:{
+        backgroundColor: 'black',
+        height: "100%"
+    },
+    text:{
+        color: "red",
+        fontSize: 40,
+        textAlign: "center",
+        marginTop: 50,
+    },
+    email:{
+        textAlign: "center",
+        fontSize: 20,
+        marginLeft: 55,
+        marginTop: 150,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: 'white',
+        width: 300,
+        height: 40,
+        color: 'white',
+        
+    },
+    senha:{
+        fontSize: 20,
+        textAlign: "center",
+        marginLeft: 55,
+        marginTop: 20,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: 'white',
+        width: 300,
+        height: 40,
+        color: 'white'
+
+    },
+    botao:{
+        textAlign: "center",
+        marginTop: 70,
+        fontSize: 17,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: 'white',
+        width: 200,
+        marginLeft: 105,
+        color: 'white'
+
+    }
+})
 
 export default SignIn;

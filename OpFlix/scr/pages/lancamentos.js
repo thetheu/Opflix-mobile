@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, AsyncStorage } from 'react-native';
+import { Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
-class Profile extends Component {
+class Lancamentos extends Component {
 
     static navigationOptions = {
         header: null,
@@ -22,13 +22,13 @@ class Profile extends Component {
     _listarLancamentos = async () => {
         await fetch('http://192.168.3.60:5000/api/filmeSeries', {
             headers: {
-                'Authorization' : 'Bearer ' + await AsyncStorage.getItem('@opflix:token')
+                'Authorization' : 'bearer' + await AsyncStorage.getItem('@opflix:token')
             }
         })
         .then(response => response.json())
-        .then(data => this.setState({ lancamentos: data }))
-        .catch(erro => console.warn(erro, 'asdwasdw'))
-    } 
+        .then(data => this.setState({ lancamentos: data}))
+        .catch(erro => console.warn(erro))
+    }
 
     render() {
         return (
@@ -38,7 +38,7 @@ class Profile extends Component {
                 keyExtractor = {item => item.idFs}
                 renderItem = {({item}) => (
                     <View>
-                        <Text style={{color:'black'}}>{item.titulo}</Text>
+                        <Text>{item.titulo}</Text>
                     </View>
                 )}
                 />
@@ -47,4 +47,4 @@ class Profile extends Component {
     }
 }
 
-export default Profile;
+export default Lancamentos;

@@ -4,21 +4,21 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import SignInScreen from './pages/signin';
 import ProfileScreen from './pages/profile';
+import LancamentosScreen from './pages/lancamentos';
 
 const AuthStack = createStackNavigator({
     Sign: { screen: SignInScreen},
 })
 
 
+
 const MainNavigator = createStackNavigator({
     ProfileScreen: {
         screen: ProfileScreen,
     },
-    Sign: { 
-        screen: SignInScreen
-    },{
-        initialRouteName
-    }
+    LancamentosScreen: { 
+        screen: LancamentosScreen
+    },
 });
 
 
