@@ -1,7 +1,7 @@
-import React, {Fragment, Component} from 'react';
-import { AsyncStorage, Text, View, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
+import React, { Fragment, Component } from 'react';
+import { AsyncStorage, Text, View, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
-class SignIn extends Component{
+class SignIn extends Component {
 
     static navigationOptions = {
         header: null,
@@ -10,8 +10,8 @@ class SignIn extends Component{
     constructor() {
         super();
         this.state = {
-            email: "",
-            senha: ""
+            email: "erik@email.com",
+            senha: "123456"
         };
     }
 
@@ -20,70 +20,70 @@ class SignIn extends Component{
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type' : 'application/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 email: this.state.email,
                 senha: this.state.senha
             }),
         })
-        .then(resposta => resposta.json())
-        .then(data => this._home(data.token))
-        .catch(erro => console.warn('erro>',erro));
+            .then(resposta => resposta.json())
+            .then(data => this._home(data.token))
+            .catch(erro => console.warn('erro>', erro));
     }
 
     _home = async (tokenRecebido) => {
-        if(tokenRecebido != null) {
+        if (tokenRecebido != null) {
             try {
                 await AsyncStorage.setItem('@opflix:token', tokenRecebido);
                 this.props.navigation.navigate('MainNavigator')
             } catch (error) {
-                console.warn('erro>kjfghjkl',error)
+                console.warn('erro>kjfghjkl', error)
             }
         }
     };
 
     render() {
-        return(
+        return (
             <View style={styles.fundo}>
-                
-            <View>
-                <Text style={styles.text}>OPFLIX</Text>
-                <TextInput
-                placeholderTextColor="gray"
-                placeholder="email"
-                onChangeText={email => this.setState({ email })}
-                value={this.state.email}
-                style={styles.email}
-                />
-                <TextInput
-                placeholderTextColor="gray"
-                placeholder="senha"
-                onChangeText={senha => this.setState({ senha })}
-                value={this.state.senha}
-                style={styles.senha}
-                />
-                <TouchableOpacity onPress={this._realizarLogin}>
-                    <Text style={styles.botao}>Logar</Text>
-                </TouchableOpacity>
-            </View>
+
+                <View>
+                    <Text style={styles.text}>OPFLIX</Text>
+                    <TextInput
+                        placeholderTextColor="gray"
+                        placeholder="email"
+                        onChangeText={email => this.setState({ email })}
+                        value={this.state.email}
+                        style={styles.email}
+                    />
+                    <TextInput
+                        placeholderTextColor="gray"
+                        placeholder="senha"
+                        onChangeText={senha => this.setState({ senha })}
+                        value={this.state.senha}
+                        style={styles.senha}
+                    />
+                    <TouchableOpacity onPress={this._realizarLogin}>
+                        <Text style={styles.botao}>Logar</Text>
+                    </TouchableOpacity>
                 </View>
+            </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    fundo:{
+    fundo: {
         backgroundColor: 'black',
         height: "100%"
     },
-    text:{
+    text: {
         color: "red",
         fontSize: 40,
         textAlign: "center",
         marginTop: 50,
     },
-    email:{
+    email: {
         textAlign: "center",
         fontSize: 20,
         marginLeft: 55,
@@ -94,9 +94,9 @@ const styles = StyleSheet.create({
         width: 300,
         height: 40,
         color: 'white',
-        
+
     },
-    senha:{
+    senha: {
         fontSize: 20,
         textAlign: "center",
         marginLeft: 55,
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
         color: 'white'
 
     },
-    botao:{
+    botao: {
         textAlign: "center",
         marginTop: 70,
         fontSize: 17,

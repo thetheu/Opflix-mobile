@@ -7,18 +7,17 @@ import ProfileScreen from './pages/profile';
 import LancamentosScreen from './pages/lancamentos';
 
 const AuthStack = createStackNavigator({
-    Sign: { screen: SignInScreen},
+    Sign: { screen: SignInScreen },
 })
 
-
-
 const MainNavigator = createStackNavigator({
-    ProfileScreen: {
-        screen: ProfileScreen,
-    },
-    LancamentosScreen: { 
+
+    LancamentosScreen: {
         screen: LancamentosScreen
     },
+    ProfileScreen: {
+        screen: ProfileScreen,
+    }
 });
 
 
