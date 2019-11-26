@@ -1,51 +1,60 @@
 import React, { Component } from 'react';
-import { Text, View, AsyncStorage } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { Text, View, AsyncStorage, StyleSheet, Image } from 'react-native';
+
+import jwtDecode from "jwt-decode"
 
 class Profile extends Component {
 
     static navigationOptions = {
-        header: null,
-    };
+        tabBarIcon: () => (
+        <Image
+        source={require('../assets/img/users.png')}
+        style={styles.tabBarNavigatorIcon}
+    />    
+    )
+};
 
     constructor() {
         super();
         this.state = {
-            lancamentos: []
+            usuarios: [],
         }
     }
 
     componentDidMount() {
-        this._listarLancamentos();
+        this._recuperarUsuario();
     }
 
-    _listarLancamentos = async () => {
-        await fetch('http://192.168.3.60:5000/api/filmeSeries', {
-            headers: {
-                'Authorization': 'Bearer ' + await AsyncStorage.getItem('@opflix:token')
-            }
-        })
-            .then(response => response.json())
-            .then(data => this.setState({ lancamentos: data }))
-            .catch(erro => console.warn(erro, 'asdwasdw'))
+    _recuperarUsuario = async () => {
+        let token = await AsyncStorage.getItem('@opflix:token');
+        let decoded = jwtDecode(token);
+        console.warn(decoded)
+        if (decoded !== null) {
+            this.setState({ usuarios: decoded })
+        } else {
+            console.warn('tá nulo')
+        }
     }
 
     render() {
         return (
             <View>
-                <Text>Oi</Text>
-                <FlatList
-                    data={this.state.lancamentos}
-                    keyExtractor={item => item.idFs}
-                    renderItem={({ item }) => (
-                        <View>
-                            <Text style={{ color: 'black' }}>{item.titulo}</Text>
-                        </View>
-                    )}
-                />
+                <Image source={{ uri: this.state.usuarios.Foto}} style={styles.foto}/>
+                <Text>{this.state.usuarios.email}</Text>
             </View>
         )
     }
 }
+const styles = StyleSheet.create({
+    tabBarNavigatorIcon: {
+        width: 30,
+        height: 30,
+        tintColor: "#db3a2e"
+    },
+    foto: {
+        width: 150,
+        height: 150
+    },
+})
 
 export default Profile;

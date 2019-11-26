@@ -10,7 +10,7 @@ const AuthStack = createStackNavigator({
     Sign: { screen: SignInScreen },
 })
 
-const MainNavigator = createStackNavigator({
+const MainNavigator = createBottomTabNavigator({
 
     LancamentosScreen: {
         screen: LancamentosScreen
@@ -18,7 +18,20 @@ const MainNavigator = createStackNavigator({
     ProfileScreen: {
         screen: ProfileScreen,
     }
-});
+},
+    {
+        tabBarOptions: {
+            showIcon: true,
+            showLabel: false,
+            inactiveBackgroundColor: '#111',
+            activeBackgroundColor: '#000',
+            style: {
+                width: '100%',
+                height: 50,
+            },
+        },
+    }
+);
 
 
 

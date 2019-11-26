@@ -10,8 +10,8 @@ class SignIn extends Component {
     constructor() {
         super();
         this.state = {
-            email: "erik@email.com",
-            senha: "123456"
+            email: "",
+            senha: ""
         };
     }
 

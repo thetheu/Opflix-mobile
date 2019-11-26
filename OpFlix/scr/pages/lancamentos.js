@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import { Text, View, Picker, AsyncStorage, StyleSheet } from 'react-native';
+import { Text, View, Picker, AsyncStorage, StyleSheet, Image } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
 class Lancamentos extends Component {
 
     static navigationOptions = {
-        header: null,
+        tabBarIcon: () => (
+                <Image
+                source={require('../assets/img/list.png')}
+                style={styles.tabBarNavigatorIcon}
+            />
+        )
     };
 
     constructor() {
@@ -88,6 +93,7 @@ class Lancamentos extends Component {
 
                     <Text style={styles.Lanca}>Lançamentos</Text>
 
+
                     {this.state.valorSelecionado == 0 ? <FlatList
                         data={this.state.lancamentos}
                         keyExtractor={item => item.idFs}
@@ -103,11 +109,12 @@ class Lancamentos extends Component {
                         <FlatList
                             data={this.state.novaLista}
                             keyExtractor={item => item.idFs}
-                            ListEmptyComponent={<Text>Não há itens</Text>}
+                            ListEmptyComponent={<Text style={styles.nao}>Não há itens</Text>}
                             renderItem={({ item }) => (
                                 <View>
-                                    <Text >{item.titulo}</Text>
-                                    <Text >{item.sinopse}</Text>
+                                    <View style={{height: 1, backgroundColor: "black", marginLeft: 15, marginRight: 15}}></View>
+                                    <Text style={styles.titulo}>{item.titulo}</Text>
+                                    <Text style={styles.sinopse}>{item.sinopse}</Text>
                                 </View>
                             )}
                         />}
@@ -119,6 +126,15 @@ class Lancamentos extends Component {
 }
 
 const styles = StyleSheet.create({
+    tabBarNavigatorIcon: {
+        width: 30,
+        height: 30,
+        tintColor: "#db3a2e"
+    },
+    nao: {
+        textAlign: "center",
+        fontSize: 20
+    },
     titulo: {
         fontSize: 20,
         textAlign: "center",
@@ -139,7 +155,8 @@ const styles = StyleSheet.create({
         marginBottom: 50
     },
     selecione: {
-        textAlign: "center",        
+        backgroundColor: "black",
+        color: "white",        
     },
 })
 
